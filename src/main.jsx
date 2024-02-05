@@ -11,7 +11,7 @@ import Register from './components/Register.jsx'
 import Login from './components/Login.jsx'
 import Home from './pages/Home.jsx'
 import ActiveUsersTable from './pages/ActiveUsersTable.jsx'
-import { FirebaseProvider } from './firebase/firebase.jsx'
+import { FirebaseProvider } from './firebase/Firebase.jsx';
 
 // Creating routes
 const router = createBrowserRouter(createRoutesFromElements(
