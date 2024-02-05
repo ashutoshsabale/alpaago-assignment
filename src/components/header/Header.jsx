@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import LogoutBtn from "./LogoutBtn";
-import { useFirebase } from '../../firebase/firebase';
+import { useFirebase } from '../../firebase/Firebase.jsx';
 
 function Header(){
     const navigate = useNavigate();

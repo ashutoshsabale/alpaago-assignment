@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useFirebase } from "../firebase/firebase";
+import { useFirebase } from "../firebase/Firebase.jsx";
 
 function Login() {
     const navigate = useNavigate();

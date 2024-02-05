@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useFirebase } from '../../firebase/firebase';
+import { useFirebase } from '../../firebase/Firebase.jsx';
 
 function LogoutBtn() {
     const navigate = useNavigate();

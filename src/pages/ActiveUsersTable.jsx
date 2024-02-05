@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useFirebase } from '../firebase/firebase';
+import { useFirebase } from '../firebase/Firebase.jsx';
 
 function Users() {
     const [activeUsers, setActiveUsers] = useState([]);
