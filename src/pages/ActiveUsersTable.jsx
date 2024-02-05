@@ -61,22 +61,28 @@ function Users() {
     };
 
 
-    const handleDateChange = (selectedDate) => {
-    setSelectedDate(selectedDate);
-    const filtered = activeUsers.filter(user => {
-        // Convert the user's createdAt to a Date object
-        console.log("user.addedDate :", user?.addedDate);
-        const milliseconds = user.addedDate.seconds * 1000 + user.addedDate.nanoseconds / 1000000;
-        const userCreatedAt = new Date(user.addedDate);
-        console.log("userCreatedAt : ", userCreatedAt)
-        const userDate = new Date(userCreatedAt);
-        // console.log("USer.getTime Date: ", userDate.getTime());
-        // console.log("selected.getTime Date: ", selectedDate.getTime());
-        // Compare the user's createdAt with the selected date
-        return userDate.getTime() === selectedDate.getTime();
-    });
-    setFilteredUsers(filtered);
-};
+    const handleDateChange = (selectedDate_) => {
+        setSelectedDate(selectedDate_);
+        let isDate = new Boolean(selectedDate_)
+        console.log("Boolean value ", isDate );
+        const filtered = activeUsers.filter(user => {
+            if(isDate){
+                // Convert the user's createdAt to a Date object
+                console.log("user.addedDate :", user?.addedDate);
+                const milliseconds = user.addedDate.seconds * 1000 + user.addedDate.nanoseconds / 1000000;
+                const userCreatedAt = new Date(milliseconds);
+                console.log("userCreatedAt : ", userCreatedAt)
+                const userDate = new Date(userCreatedAt);
+                // console.log("USer.getTime Date: ", userDate.getTime());
+                // console.log("selected.getTime Date: ", selectedDate.getTime());
+                // Compare the user's createdAt with the selected date
+                return userDate.toLocaleDateString() === selectedDate?.toLocaleDateString();
+            } else{
+                return activeUsers;
+            }
+        });
+        setFilteredUsers(filtered);
+    };
 
 
     return (
