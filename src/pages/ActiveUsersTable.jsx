@@ -55,31 +55,28 @@ function Users() {
         const { value } = e.target;
         setSearchTerm(value);
         const filtered = activeUsers.filter(user =>
-        user.username.toLowerCase().includes(value.toLowerCase())
+            user.username.toLowerCase().includes(value.toLowerCase())
         );
         setFilteredUsers(filtered);
     };
 
+    console.log("Selected date is : ", selectedDate);
 
     const handleDateChange = (selectedDate_) => {
-        setSelectedDate(selectedDate_);
-        let isDate = new Boolean(selectedDate_)
-        console.log("Boolean value ", isDate );
+
+        const date = new Date(selectedDate_);
+        const formattedDate = date?.toISOString().split('T')[0];
+        setSelectedDate(formattedDate);
+
+        console.log("selectedDate_ : ", selectedDate_.toLocaleDateString());
         const filtered = activeUsers.filter(user => {
-            if(isDate){
-                // Convert the user's createdAt to a Date object
-                console.log("user.addedDate :", user?.addedDate);
-                const milliseconds = user.addedDate.seconds * 1000 + user.addedDate.nanoseconds / 1000000;
-                const userCreatedAt = new Date(milliseconds);
-                console.log("userCreatedAt : ", userCreatedAt)
-                const userDate = new Date(userCreatedAt);
-                // console.log("USer.getTime Date: ", userDate.getTime());
-                // console.log("selected.getTime Date: ", selectedDate.getTime());
-                // Compare the user's createdAt with the selected date
-                return userDate.toLocaleDateString() === selectedDate?.toLocaleDateString();
-            } else{
-                return activeUsers;
-            }
+            // Convert the user's createdAt to a Date object
+            const milliseconds = user.addedDate.seconds * 1000 + user.addedDate.nanoseconds / 1000000;
+            const userCreatedAt = new Date(milliseconds);
+            const userDate = new Date(userCreatedAt);
+
+            return userDate.toLocaleDateString() === selectedDate_?.toLocaleDateString();
+
         });
         setFilteredUsers(filtered);
     };
@@ -95,12 +92,22 @@ function Users() {
                     onChange={handleFilter}
                     className="block w-[500px] px-5 py-3 border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                 />
-                <input
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => handleDateChange(new Date(e.target.value))}
-                    className="block w-[200px] px-5 border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                />
+                <div className='flex gap-5'>
+                    <input
+                        type="date"
+                        value={selectedDate}
+                        onChange={(e) => handleDateChange(new Date(e.target.value))}
+                        className="block w-[200px] px-5 border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    />
+                    <button
+                        onClick={() => {
+                            setSelectedDate("");
+                            setFilteredUsers(activeUsers);
+                        }}
+                    >
+                        Clear date
+                    </button>
+                </div>
             </div>
             <table className="mt-8 w-full table-auto">
                 <thead className='text-black'>
